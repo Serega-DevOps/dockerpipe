@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+  options {
+     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+     timestamps()
+  }
+  stages {
+    stage ("Create Docker Image") {
+      steps {
+        echo "========== start building image =========="
+        dir ('docker/toolbox') {
+            sh 'docker build .'
+        }
+      }
+    }
+  }
+}
