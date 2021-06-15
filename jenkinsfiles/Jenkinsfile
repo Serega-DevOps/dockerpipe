@@ -1,11 +1,10 @@
 pipeline {
-    agent any
+  agent any
+  triggers { pollSCM('*****') }
   options {
      buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
      timestamps()
   }
-  triggers { pollSCM('*****') }
-  
   stages {
     stage ("Create Docker Image") {
       steps {
